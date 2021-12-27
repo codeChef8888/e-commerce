@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>eCommerce</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container my-2">
+				<h1>Product Categories</h1>
+				
+		<div class="container" align="left" >
+		<a th:href="@{/eCommerce/newCategoryForm}"
+			class="btn btn-primary btn-sm mb-3">Add Category</a>
+			
+			 <a th:href="@{/eCommerce/formNewProduct}"
+						class="btn btn-primary">Add Product</a>
+		</div>
+
+		<table border="1" class="table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>Category Name</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="category : ${listCategories}">
+					<td th:text="${category.categoryName}"></td>
+					<td>
+					<a th:href="@{/eCommerce/formForUpdateCategory/{id}(id=${category.id})}"
+						class="btn btn-primary">Update</a> 
+						<a th:href="@{/eCommerce/deleteCategory/{id}(id=${category.id})}"
+						class="btn btn-danger">Delete</a> 
+						<a th:href="@{/eCommerce/formAddProduct/{categoryId}(categoryId=${category.id})}"
+						class="btn btn-primary">Add Product</a>
+						 <a th:href="@{/eCommerce/listCategoryProducts/{categoryId}(categoryId=${category.id})}"
+						class="btn btn-primary">Show Products</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

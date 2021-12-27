@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>eCommerce</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<div class="container">
+		<h1>Product Management</h1>
+		<hr>
+		<h2>Add New Product</h2>
+
+		<form th:action="@{/eCommerce/categories/products/add}"
+			th:object="${product}" method="POST">
+			
+			<input type="hidden" th:field="*{id}"> 
+				
+				<input type="text" th:field="*{productName}" placeholder="Product Name"
+				class="form-control mb-4 col-4"> 
+			
+				
+				<label for="category">Choose a category:</label>
+				<select id="category" class="form-control mb-4 col-4" th:field="*{productCategoryDto}" multiple="multiple">
+				<option th:each="category:${productCategoryDto}" th:text="${category.categoryName}" th:value="${category.id}"></option>
+				</select>
+
+				<input type="text"
+				th:field="*{price}" placeholder="Price"
+				class="form-control mb-4 col-4"> 
+				
+				<input type="text"
+				th:field="*{description}" placeholder="Description"
+				class="form-control mb-4 col-4">
+
+
+			<button type="submit" class="btn btn-info col-2">Save</button>
+		</form>
+
+	</div>
+</body>
+</html>
