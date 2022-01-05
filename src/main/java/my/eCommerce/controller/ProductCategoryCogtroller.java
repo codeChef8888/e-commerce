@@ -22,7 +22,7 @@ import my.eCommerce.service.ProductCategoryService;
 
 @Controller
 
-public class ProductCategoryController {
+public class ProductCategoryCogtroller {
 
 	@Autowired
 	ProductCategoryService productCategoryService;
