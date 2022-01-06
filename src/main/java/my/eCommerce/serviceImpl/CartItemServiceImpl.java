@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import my.eCommerce.controller.mapper.CartItemMapper;
 import my.eCommerce.controller.mapper.ProductMapper;
 import my.eCommerce.dto.ProductDto;
 import my.eCommerce.model.CartItem;
@@ -17,9 +18,11 @@ public class CartItemServiceImpl implements CartItemService {
 
 	@Autowired
 	CartItemRepository cartItemRepository;
+	
+
 
 	@Inject
-	ProductMapper mapper;
+	ProductMapper productMapper;
 
 	@Override
 	public Object listCartItems() {
@@ -27,7 +30,7 @@ public class CartItemServiceImpl implements CartItemService {
 	}
 
 	public void addItem(ProductDto productDto) {
-		Product product = mapper.DtoToProduct(productDto);
+		Product product = productMapper.DtoToProduct(productDto);
        CartItem item = new CartItem();
        item.setProduct(product);
 		cartItemRepository.save(item);
