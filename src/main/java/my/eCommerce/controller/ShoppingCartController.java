@@ -3,6 +3,8 @@ package my.eCommerce.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import my.eCommerce.dto.ProductDto;
 import my.eCommerce.model.CartItem;
+import my.eCommerce.model.PaymentRespone;
 import my.eCommerce.service.CartItemService;
 import my.eCommerce.serviceImpl.CartItemServiceImpl;
 import my.eCommerce.serviceImpl.ProductCategoryServiceImpl;
@@ -44,10 +47,22 @@ public class ShoppingCartController {
 		return "redirect:/categories/products";
 	}
 	
+	@Transactional
+	@RequestMapping(value = "/cart/delete")
+	public String deleteCartItem() {
+		System.out.println("Emptied the Cart");
+
+		cartItemServiceImpl.clearCartItem();
+		return "redirect:/categories/products";
+		
+	}
+	
 	@RequestMapping(method = RequestMethod.GET ,value = "/cart/delete/{cartId}")
 	public String deleteItem(@PathVariable(value = "cartId") Integer cartId) {
 		cartItemServiceImpl.deleteItem(cartId);
 		return "redirect:/cart";
 	}
+	
+
 
 }

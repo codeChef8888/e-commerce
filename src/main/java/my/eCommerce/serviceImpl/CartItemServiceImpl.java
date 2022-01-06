@@ -42,6 +42,12 @@ public class CartItemServiceImpl implements CartItemService {
 		
 	}
 
+	@Override
+	public void clearCartItem() {
+		cartItemRepository.clearCart();
+		
+	}
+
 
 
 }
