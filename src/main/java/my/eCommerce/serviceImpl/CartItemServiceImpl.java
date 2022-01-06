@@ -28,8 +28,9 @@ public class CartItemServiceImpl implements CartItemService {
 
 	public void addItem(ProductDto productDto) {
 		Product product = mapper.DtoToProduct(productDto);
-       CartItem item = new CartItem();
+          CartItem item = new CartItem();
        item.setProduct(product);
+	   
 		cartItemRepository.save(item);
 	}
 
