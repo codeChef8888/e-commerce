@@ -3,6 +3,7 @@ package my.eCommerce.controller;
 
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import my.eCommerce.model.PayloadRespone;
 import my.eCommerce.model.PaymentRespone;
+import my.eCommerce.serviceImpl.CartItemServiceImpl;
 
 @RestController
 @CrossOrigin
 public class PaymentController {
 
+	@Autowired
+	CartItemServiceImpl cartItemServiceImpl;
+	
 	@PostMapping("/paymentDemo")
 	public ResponseEntity<Object> verifyPayment(PaymentRespone pay) {
 		
@@ -28,7 +33,9 @@ public class PaymentController {
 		payload.setToken(pay.getToken());
 		payload.setAmount(pay.getAmount());
 		
+	 
 		System.out.print(pay);
+
 		
 		return new ResponseEntity<>(payload,responseHeaders,HttpStatus.OK);
 		
