@@ -68,6 +68,31 @@
 	<script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
 	<script>
 	
+	function copyOrder(){
+				$.ajax({
+				url: '/cart/copyOrder',
+				type: 'PUT',
+				data: record,
+				dataType: 'json',
+				success: function (response) {
+				
+				alert('OrderCopied');
+				}
+			});
+	}
+		function updateCart(record){
+				$.ajax({
+				url: '/cart/updateOrder',
+				type: 'PUT',
+				data: record,
+				dataType: 'json',
+				success: function (response) {
+			
+				alert('CartCleared');
+				}
+			});
+	}
+	
 	function clearCart(){
 				$.ajax({
 				url: '/cart/delete',
@@ -85,11 +110,16 @@
 				data: payload,
 				dataType: 'json',
 				success: function (response) {
-					alert("Payement Successful!!!");
+			    console.log(response)
+					alert("Payment Successful!!!");
+					
 					setTimeout(function () {
 						window.location = "/categories/products";
 					}, 1000);
-					clearCart(Response);
+					
+					 updateCart(response);
+				
+			
 
 				},
 				error: function (error) {alert(error.responseJSON['message'])}

@@ -8,6 +8,7 @@ public class ProductDto {
 	private String description;
 	private Boolean availability;
 	private String pictureUrl;
+	private Boolean status;
 	private ProductCategoryDto productCategoryDto;
 
 	public ProductDto() {
@@ -15,12 +16,13 @@ public class ProductDto {
 	}
 
 	public ProductDto(String productName, Double price, String description, Boolean availability, String pictureUrl,
-			long productCategoryDtoId) {
+			Boolean status,long productCategoryDtoId) {
 		this.productName = productName;
 		this.price = price;
 		this.description = description;
 		this.availability = availability;
 		this.pictureUrl = pictureUrl;
+		this.status=status;
 		this.productCategoryDto = new ProductCategoryDto(productCategoryDtoId, "");
 	}
 

@@ -48,6 +48,15 @@ public class CartItemServiceImpl implements CartItemService {
 		
 	}
 
+	@Override
+	public void updateOrder(String token) {
+		System.out.println("bhitrako bhitra chirkyo");
+		
+		cartItemRepository.updateCart(token);
+		
+	}
+
+
 
 
 }
