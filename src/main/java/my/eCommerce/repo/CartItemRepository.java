@@ -12,7 +12,7 @@ import my.eCommerce.model.CartItem;
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem,Integer>{
 
-	@Query(value = "select c.id, c.product_id,c.customer_id,c.quantity,c.customer_mobile from cart_items c "
+	@Query(value = "select  distinct c.id, c.product_id,c.customer_id,c.quantity,c.customer_mobile from cart_items c "
 			+ " inner join products p on c.product_id=p.id where p.status=0" , nativeQuery = true)
 	public List<CartItem> getAllCartItems();
 	
