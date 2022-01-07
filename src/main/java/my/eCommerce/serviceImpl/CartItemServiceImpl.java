@@ -26,13 +26,21 @@ public class CartItemServiceImpl implements CartItemService {
 
 	@Override
 	public Object listCartItems() {
-		return cartItemRepository.findAll();
+		return cartItemRepository.getAllCartItems();
 	}
 
 	public void addItem(ProductDto productDto) {
+		
 		Product product = productMapper.DtoToProduct(productDto);
        CartItem item = new CartItem();
-       item.setProduct(product);
+      
+       System.out.println("this is the product "+product);
+       
+       cartItemRepository.updateAvailablityStatus(product.getId());
+      
+       System.out.println("this the product status"+product.getStatus());
+      
+      	item.setProduct(product);
 		cartItemRepository.save(item);
 	}
 

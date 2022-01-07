@@ -43,11 +43,13 @@ public class ShoppingCartController {
 	}
 	
 
-	
+	@Transactional
 	@RequestMapping(method = RequestMethod.GET, value = "/cart/{productId}")
 	public String addToCart(@PathVariable(value = "productId") Long productId, Model model) {
+		
 		Optional<ProductDto> productOptional = productServiceImpl.getProduct(productId);
 		ProductDto product = productOptional.get();
+		
 		cartItemServiceImpl.addItem(product);
 		return "redirect:/categories/products";
 	}

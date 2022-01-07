@@ -77,6 +77,15 @@ public class ProductDto {
 	public ProductCategoryDto getProductCategoryDto() {
 		return productCategoryDto;
 	}
+	
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
 
 	public void setProductCategoryDto(ProductCategoryDto productCategoryDto) {
 		this.productCategoryDto = productCategoryDto;
