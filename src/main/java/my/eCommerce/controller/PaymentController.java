@@ -32,9 +32,10 @@ public class PaymentController {
 		PayloadRespone payload=new PayloadRespone();
 		payload.setToken(pay.getToken());
 		payload.setAmount(pay.getAmount());
+		payload.setMobile(pay.getMobile());
 		
 	 
-		System.out.print(pay);
+		System.out.print("this is the payment id"+pay.getIdx());
 
 		
 		return new ResponseEntity<>(payload,responseHeaders,HttpStatus.OK);

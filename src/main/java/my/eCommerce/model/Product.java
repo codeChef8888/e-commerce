@@ -44,6 +44,9 @@ public class Product implements Serializable {
 
 	@Column(name = "picture")
 	private String pictureUrl;
+	
+	@Column(name = "status")
+	private Boolean status;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id")
@@ -55,12 +58,14 @@ public class Product implements Serializable {
 	}
 
 	public Product(String productName, Double price, String description, Boolean availability, String pictureUrl,
+			Boolean status,
 			long productCategoryId) {
 		this.productName = productName;
 		this.price = price;
 		this.description = description;
 		this.availability = availability;
 		this.pictureUrl = pictureUrl;
+		this.status = status;
 		this.productCategory = new ProductCategory(id, "");
 	}
 
@@ -126,6 +131,16 @@ public class Product implements Serializable {
 
 	public void setProductCategory(ProductCategory productCategory) {
 		this.productCategory = productCategory;
+	}
+	
+	
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
 	@Override

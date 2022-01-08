@@ -51,22 +51,33 @@
 
 	</div>
 
-	<div class="form-popup" id="myForm">
-		<form action="/action_page.php" class="form-container">
-			<h1>Login</h1>
-
-			<label for="email"><b>Email</b></label>
-			<input type="text" placeholder="Enter Email" name="email" required>
-
-			<label for="psw"><b>Password</b></label>
-			<input type="password" placeholder="Enter Password" name="psw" required>
-
-			<button type="submit" class="btn">Login</button>
-			<button type="button" class="btn cancel" th:onclick="closeForm()">Close</button>
-		</form>
-	</div>
 	<script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
 	<script>
+	
+	function copyOrder(){
+				$.ajax({
+				url: '/cart/copyOrder',
+				type: 'PUT',
+				data: record,
+				dataType: 'json',
+				success: function (response) {
+				
+				alert('OrderCopied');
+				}
+			});
+	}
+		function updateCart(record){
+				$.ajax({
+				url: '/cart/updateOrder',
+				type: 'PUT',
+				data: record,
+				dataType: 'json',
+				success: function (response) {
+			
+				alert('CartCleared');
+				}
+			});
+	}
 	
 	function clearCart(){
 				$.ajax({
@@ -85,11 +96,16 @@
 				data: payload,
 				dataType: 'json',
 				success: function (response) {
-					alert("Payement Successful!!!");
+			    console.log(response)
+					alert("Payment Successful!!!");
+					
 					setTimeout(function () {
 						window.location = "/categories/products";
 					}, 1000);
-					clearCart(Response);
+					
+					 updateCart(response);
+				
+			
 
 				},
 				error: function (error) {alert(error.responseJSON['message'])}

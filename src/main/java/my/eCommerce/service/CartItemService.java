@@ -14,4 +14,6 @@ public interface CartItemService {
 	
 	public void clearCartItem();
 	
+	public void updateOrder(String token);
+	
 }

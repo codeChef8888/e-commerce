@@ -30,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Object getProducts() {
-		return mapper.productListToDto(productRepository.findAll());
+		return mapper.productListToDto(productRepository.getAllProductItem());
 	}
 
 	public Object getAllProducts(Long id) {
