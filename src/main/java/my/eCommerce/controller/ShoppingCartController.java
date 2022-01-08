@@ -1,6 +1,6 @@
 package my.eCommerce.controller;
 
-import java.util.List;
+
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -9,21 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+
+
 
 import my.eCommerce.dto.ProductDto;
-import my.eCommerce.model.CartItem;
+
 import my.eCommerce.model.PaymentRespone;
-import my.eCommerce.service.CartItemService;
+
 import my.eCommerce.serviceImpl.CartItemServiceImpl;
-import my.eCommerce.serviceImpl.ProductCategoryServiceImpl;
+
 import my.eCommerce.serviceImpl.ProductServiceImpl;
 
 @Controller
@@ -35,6 +36,8 @@ public class ShoppingCartController {
 	
 	@Autowired
 	ProductServiceImpl productServiceImpl;
+	
+
 
 	@GetMapping("/cart")
 	public String getCartItems(Model model){

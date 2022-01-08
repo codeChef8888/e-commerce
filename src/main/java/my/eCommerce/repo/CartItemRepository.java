@@ -1,6 +1,7 @@
 package my.eCommerce.repo;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -11,6 +12,8 @@ import my.eCommerce.model.CartItem;
 
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem,Integer>{
+	
+	public Optional<CartItem> findByProductId(Long id); 
 
 	@Query(value = "select  distinct c.id, c.product_id,c.customer_id,c.quantity,c.customer_mobile from cart_items c "
 			+ " inner join products p on c.product_id=p.id where p.status=0" , nativeQuery = true)
