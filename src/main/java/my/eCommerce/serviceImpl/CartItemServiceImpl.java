@@ -1,10 +1,8 @@
 package my.eCommerce.serviceImpl;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
-import javax.management.RuntimeErrorException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Service;
 import my.eCommerce.controller.mapper.CartItemMapper;
 import my.eCommerce.controller.mapper.ProductMapper;
 import my.eCommerce.dto.ProductDto;
+import my.eCommerce.exception.ProductAlreadyAddedException;
 import my.eCommerce.model.CartItem;
 import my.eCommerce.model.Product;
 import my.eCommerce.repo.CartItemRepository;
@@ -35,25 +34,28 @@ public class CartItemServiceImpl implements CartItemService {
 
 	@Override
 	public Object listCartItems() {
-		return cartItemRepository.getAllCartItems();
+		return itemMapper.cartItemListToDto(cartItemRepository.getAllCartItems());
 	}
 
-	public void addItem(ProductDto productDto) {
-
+	public void addItem(ProductDto productDto) throws ProductAlreadyAddedException {
+		System.out.println("ma Add Item ma xu");
 		Product product = productMapper.DtoToProduct(productDto);
 
 		Optional<CartItem> cartItem = cartItemRepository.findByProductId(product.getId());
 		CartItem item = new CartItem();
-		
+
 		if (cartItem.isEmpty()) {
 
-			
 			item.setProduct(product);
 			System.out.println("ma yeta xu not empty ma");
+			System.out.println("this is the product id" + product.getId());
+			Long id = product.getId();
+
 			cartItemRepository.save(item);
-			cartItemRepository.updateAvailablityStatus(product.getId());
+			cartItemRepository.updateAvailablityStatus(id);
+
 		} else {
-	;
+			throw new ProductAlreadyAddedException(product.getProductName() +" is already added!!!");
 		}
 
 		System.out.println("this is the product " + product);
