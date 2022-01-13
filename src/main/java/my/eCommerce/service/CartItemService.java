@@ -1,14 +1,15 @@
 package my.eCommerce.service;
 
 import my.eCommerce.dto.ProductDto;
-import my.eCommerce.model.CartItem;
+import my.eCommerce.exception.ProductAlreadyAddedException;
+
 
 public interface CartItemService {
 
 	
 	public Object listCartItems();
 	
-	public void addItem(ProductDto productDto);
+	public void addItem(ProductDto productDto) throws ProductAlreadyAddedException;
 	
 	public void deleteItem(Integer id);
 	

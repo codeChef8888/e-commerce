@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 import my.eCommerce.dto.ProductDto;
-
+import my.eCommerce.exception.ProductAlreadyAddedException;
 import my.eCommerce.model.PaymentRespone;
 
 import my.eCommerce.serviceImpl.CartItemServiceImpl;
@@ -28,7 +28,6 @@ import my.eCommerce.serviceImpl.CartItemServiceImpl;
 import my.eCommerce.serviceImpl.ProductServiceImpl;
 
 @Controller
-@CrossOrigin
 public class ShoppingCartController {
 	
 	@Autowired
@@ -47,9 +46,9 @@ public class ShoppingCartController {
 	
 
 	@Transactional
-	@RequestMapping(method = RequestMethod.GET, value = "/cart/{productId}")
-	public String addToCart(@PathVariable(value = "productId") Long productId, Model model) {
-		
+	@RequestMapping(method = { RequestMethod.POST, RequestMethod.GET }, value = "/cart/{productId}")
+	public String addToCart(@PathVariable(value = "productId") Long productId, Model model) throws ProductAlreadyAddedException {
+		System.out.println("ma add to cart ma xu");
 		Optional<ProductDto> productOptional = productServiceImpl.getProduct(productId);
 		ProductDto product = productOptional.get();
 		
@@ -84,7 +83,7 @@ public class ShoppingCartController {
 		
 	}
 	
-	@RequestMapping(method = RequestMethod.GET ,value = "/cart/delete/{cartId}")
+	@RequestMapping(method = {RequestMethod.GET,RequestMethod.DELETE} ,value = "/cart/delete/{cartId}")
 	public String deleteItem(@PathVariable(value = "cartId") Integer cartId) {
 		cartItemServiceImpl.deleteItem(cartId);
 		return "redirect:/cart";
