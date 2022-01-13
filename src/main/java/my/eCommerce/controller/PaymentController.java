@@ -16,7 +16,6 @@ import my.eCommerce.model.PaymentRespone;
 import my.eCommerce.serviceImpl.CartItemServiceImpl;
 
 @RestController
-@CrossOrigin
 public class PaymentController {
 
 	@Autowired
